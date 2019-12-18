@@ -17,7 +17,12 @@ class User {
     public static function find_user_by_id($user_id) {
         global $db;
         $result_set = self::find_this_query("SELECT * FROM users WHERE id = $user_id LIMIT 1");
-        $found_user = mysqli_fetch_array($result_set);
+        if(!empty($result_set)) {
+            $first_item = array_shift($result_set);
+            return $first_item;
+        } else {
+            return false;
+        }
         return $found_user;
     }
 
@@ -25,7 +30,7 @@ class User {
         global $db;
         $result_set = $db->query($sql);
         $object_array = array();
-        while($row = $db->mysqli_fetch_array($result_set)) {
+        while($row = mysqli_fetch_array($result_set)) {
             $object_array[] = self::instantiation($row);
         }
         return $object_array;
@@ -39,7 +44,7 @@ class User {
         // $the_object->last_name = $found_user['last_name'];
         foreach($the_record as $key => $value) {
             if($the_object->has_the_attribute($key)) {
-                $the_object->key = $value;
+                $the_object->$key = $value;
             }
         }
         return $the_object;

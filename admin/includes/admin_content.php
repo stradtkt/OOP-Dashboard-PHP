@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Blank Page
-            <small>Subheading</small>
+            Admin
+            <small>PHP Dashboard</small>
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -32,7 +32,13 @@
         // $user = User::instantiation($found_user);
         // echo $user->first_name;
 
-        
+        // $users = User::find_all_users();
+        // foreach($users as $user) {
+        //     echo $user->username . "<br>";
+        // }
+
+        $found_user = User::find_user_by_id(1);
+        echo $found_user->username;
         ?>
     </div>
 </div>
