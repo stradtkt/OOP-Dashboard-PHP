@@ -17,19 +17,24 @@ class Database {
     }
 
     public function query($sql) {
-        $result = mysqli_query($this->con, $sql);
+        $result = $this->con->query($sql);
+        $this->confirm_query($result);
         return $result;
     }
 
     private function confirm_query($result) {
         if(!$result) {
-            die('Query Failed');
+            die('Query Failed' . $this->con->error);
         }
     }
 
     public function escape_string($string) {
         $escaped_string = mysqli_real_escape_string($this->con, $string);
         return $escaped_string;
+    }
+
+    public function the_insert_id() {
+        return $this->con->insert_id;
     }
 }
 
