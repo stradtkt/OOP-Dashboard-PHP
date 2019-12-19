@@ -38,9 +38,9 @@ class User {
 
     public static function verify_user($username, $password) {
         global $db;
-        $username = $db->escape_string($username);
-        $password = $db->escape_string($password);
-        $sql = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}' LIMIT 1";
+        $uname = $db->escape_string($username);
+        $pass = $db->escape_string($password);
+        $sql = "SELECT * FROM users WHERE username = '{$uname}' AND password = '{$pass}' LIMIT 1";
         $result_set = self::find_this_query($sql);
         if(!empty($result_set)) {
             $first_item = array_shift($result_set);
@@ -67,6 +67,22 @@ class User {
     private function has_the_attribute($key) {
         $object_properties = get_object_vars($this);
         return array_key_exists($key, $object_properties);
+    }
+
+    public function create() {
+        global $db;
+        $sql = "INSERT INTO users (username, password, first_name, last_name) ";
+        $sql .= "VALUES ('";
+        $sql .= $db->escape_string($this->username) . "', '";
+        $sql .= $db->escape_string($this->password) . "', '";
+        $sql .= $db->escape_string($this->first_name) . "', '";
+        $sql .= $db->escape_string($this->last_name) . "')";
+        if($db->query($sql)) {
+            $this->id = $db->the_insert_id();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

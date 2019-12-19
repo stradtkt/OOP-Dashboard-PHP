@@ -37,8 +37,15 @@
         //     echo $user->username . "<br>";
         // }
 
-        $found_user = User::find_user_by_id(1);
-        echo $found_user->username;
+        // $found_user = User::find_user_by_id(1);
+        // echo $found_user->username;
+
+        // $user = new User();
+        // $user->username = "dkel";
+        // $user->password = "1234";
+        // $user->first_name = "Debra";
+        // $user->last_name = "Kellington";
+        // $user->create();
         ?>
     </div>
 </div>
