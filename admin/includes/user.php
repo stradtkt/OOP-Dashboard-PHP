@@ -36,6 +36,20 @@ class User {
         return $object_array;
     }
 
+    public static function verify_user() {
+        global $db;
+        $username = $db->escape_string($username);
+        $password = $db->escape_string($password);
+        $sql = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}' LIMIT 1";
+        $result_set = self::find_this_query($sql);
+        if(!empty($result_set)) {
+            $first_item = array_shift($result_set);
+            return $first_item;
+        } else {
+            return false;
+        }
+    }
+
     public static function instantiation($the_record) {
         $the_object = new self;
         // $the_object->username = $found_user['username'];
