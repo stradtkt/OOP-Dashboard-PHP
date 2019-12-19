@@ -46,6 +46,13 @@
         // $user->first_name = "Debra";
         // $user->last_name = "Kellington";
         // $user->create();
+
+        // $user = User::find_user_by_id(4);
+        // $user->last_name = "Russell";
+        // $user->update();
+
+        //  $user = User::find_user_by_id(3);
+        //  $user->delete();
         ?>
     </div>
 </div>

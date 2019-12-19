@@ -69,6 +69,10 @@ class User {
         return array_key_exists($key, $object_properties);
     }
 
+    public function save() {
+        return isset($this->id) ? $this->update() : $this->create();
+    }
+
     public function create() {
         global $db;
         $sql = "INSERT INTO users (username, password, first_name, last_name) ";
@@ -93,6 +97,13 @@ class User {
         $sql .= "first_name= '" . $db->escape_string($this->first_name) . "', ";
         $sql .= "last_name= '" . $db->escape_string($this->last_name) . "' ";
         $sql .= " WHERE id= " . $db->escape_string($this->id);
+        $db->query($sql);
+        return (mysqli_affected_rows($db->con) == 1) ? true : false;
+    }
+
+    public function delete() {
+        global $db;
+        $sql = "DELETE FROM users WHERE id=" . $db->escape_string($this->id) . " LIMIT 1";
         $db->query($sql);
         return (mysqli_affected_rows($db->con) == 1) ? true : false;
     }
