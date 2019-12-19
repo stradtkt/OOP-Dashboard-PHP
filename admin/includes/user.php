@@ -36,7 +36,7 @@ class User {
         return $object_array;
     }
 
-    public static function verify_user() {
+    public static function verify_user($username, $password) {
         global $db;
         $username = $db->escape_string($username);
         $password = $db->escape_string($password);
