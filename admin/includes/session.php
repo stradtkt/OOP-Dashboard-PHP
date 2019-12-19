@@ -3,6 +3,7 @@
 class Session {
     private $signed_in;
     public $user_id;
+    public $msg;
 
     function __construct() {
         session_start();
@@ -33,6 +34,23 @@ class Session {
         } else {
             unset($this->user_id);
             $this->signed_in = false;
+        }
+    }
+
+    public function message($msg="") {
+        if(!empty($msg)) {
+            $_SESSION['msg'] = $msg;
+        } else {
+            return $this->msg;
+        }
+    }
+
+    public function check_message() {
+        if(isset($_SESSION['msg'])) {
+            $this->msg = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        } else {
+            $this->msg = "";
         }
     }
 }
