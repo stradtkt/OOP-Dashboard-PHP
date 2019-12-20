@@ -53,6 +53,11 @@
 
         //  $user = User::find_user_by_id(3);
         //  $user->delete();
+
+        $users = User::find_all_users();
+        foreach($users as $user) {
+            echo $user->first_name . "<br>";
+        }
         ?>
     </div>
 </div>
